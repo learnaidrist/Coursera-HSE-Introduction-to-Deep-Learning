@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 from preprocessed_mnist import load_dataset
 X_train, y_train, X_val, y_val, X_test, y_test = load_dataset()
@@ -11,7 +11,7 @@ get_ipython().magic('matplotlib inline')
 plt.imshow(X_train[0], cmap="Greys");
 
 
-# In[2]:
+# In[3]:
 
 import tensorflow as tf
 import numpy as np
@@ -19,19 +19,19 @@ import math
 from tensorflow.python.framework import ops
 
 
-# In[3]:
+# In[4]:
 
 print(X_train.shape, y_train.shape)
 print(X_val.shape, y_val.shape)
 print(X_test.shape, y_test.shape)
 
 
-# In[4]:
+# In[5]:
 
 print(y_train[0])
 
 
-# In[5]:
+# In[6]:
 
 # Reshape the training, validate and test examples 
 X_train_flatten = X_train.reshape(X_train.shape[0], -1).T   # The "-1" makes reshape flatten the remaining dimensions
@@ -43,7 +43,7 @@ print(X_val_flatten.shape)
 print(X_test_flatten.shape)
 
 
-# In[6]:
+# In[7]:
 
 def one_hot_matrix(labels, C):
     """
@@ -58,8 +58,6 @@ def one_hot_matrix(labels, C):
     Returns: 
     one_hot -- one hot matrix
     """
-    
-    ### START CODE HERE ###
     
     # Create a tf.constant equal to C (depth), name it 'C'. (approx. 1 line)
     depth = tf.constant(C, name = "C")
@@ -76,12 +74,10 @@ def one_hot_matrix(labels, C):
     # Close the session (approx. 1 line). See method 1 above.
     sess.close()
     
-    ### END CODE HERE ###
-    
     return one_hot
 
 
-# In[7]:
+# In[8]:
 
 # encode y with one-hot
 y_train_one_hot = one_hot_matrix(y_train, 10)
@@ -93,7 +89,7 @@ print(y_val_one_hot.shape)
 print(y_test_one_hot.shape)
 
 
-# In[8]:
+# In[9]:
 
 def create_placeholders(n_x, n_y):
     """
@@ -112,15 +108,13 @@ def create_placeholders(n_x, n_y):
       In fact, the number of examples during test/train is different.
     """
 
-    ### START CODE HERE ### (approx. 2 lines)
     X = tf.placeholder(tf.float32, [n_x, None], name = "X")
     Y = tf.placeholder(tf.float32, [n_y, None], name = "Y")
-    ### END CODE HERE ###
     
     return X, Y
 
 
-# In[9]:
+# In[40]:
 
 def initialize_parameters():
     """
@@ -136,13 +130,11 @@ def initialize_parameters():
     """
     
     tf.set_random_seed(1)                   # so that your "random" numbers match ours
-        
-    ### START CODE HERE ### (approx. 6 lines of code)
-    W1 = tf.get_variable("W1", [50,784], initializer = tf.contrib.layers.xavier_initializer(seed = 1))
-    b1 = tf.get_variable("b1", [50,1], initializer = tf.zeros_initializer())
-    W2 = tf.get_variable("W2", [10, 50], initializer = tf.contrib.layers.xavier_initializer(seed = 1))
+
+    W1 = tf.get_variable("W1", [25,784], initializer = tf.contrib.layers.xavier_initializer(seed = 1))
+    b1 = tf.get_variable("b1", [25,1], initializer = tf.zeros_initializer())
+    W2 = tf.get_variable("W2", [10, 25], initializer = tf.contrib.layers.xavier_initializer(seed = 1))
     b2 = tf.get_variable("b2", [10,1], initializer = tf.zeros_initializer())
-    ### END CODE HERE ###
 
     parameters = {"W1": W1,
                   "b1": b1,
@@ -152,7 +144,7 @@ def initialize_parameters():
     return parameters
 
 
-# In[10]:
+# In[11]:
 
 def forward_propagation(X, parameters):
     """
@@ -173,16 +165,15 @@ def forward_propagation(X, parameters):
     W2 = parameters['W2']
     b2 = parameters['b2']
     
-    ### START CODE HERE ### (approx. 5 lines)              # Numpy Equivalents:
+    ###                                                    # Numpy Equivalents:
     Z1 = tf.add(tf.matmul(W1, X), b1)                      # Z1 = np.dot(W1, X) + b1
     A1 = tf.nn.relu(Z1)                                    # A1 = relu(Z1)
     Z2 = tf.add(tf.matmul(W2, A1), b2)                     # Z2 = np.dot(W2, a1) + b2
-    ### END CODE HERE ###
     
     return Z2
 
 
-# In[11]:
+# In[12]:
 
 def compute_cost(Z2, Y):
     """
@@ -199,15 +190,13 @@ def compute_cost(Z2, Y):
     # to fit the tensorflow requirement for tf.nn.softmax_cross_entropy_with_logits(...,...)
     logits = tf.transpose(Z2)
     labels = tf.transpose(Y)
-    
-    ### START CODE HERE ### (1 line of code)
+
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits = logits, labels = labels))
-    ### END CODE HERE ###
     
     return cost
 
 
-# In[12]:
+# In[13]:
 
 def random_mini_batches(X, Y, mini_batch_size = 64, seed = 0):
     """
@@ -234,29 +223,28 @@ def random_mini_batches(X, Y, mini_batch_size = 64, seed = 0):
     # Step 2: Partition (shuffled_X, shuffled_Y). Minus the end case.
     num_complete_minibatches = math.floor(m/mini_batch_size) # number of mini batches of size mini_batch_size in your partitionning
     for k in range(0, num_complete_minibatches):
-        ### START CODE HERE ### (approx. 2 lines)
         mini_batch_X = shuffled_X[:, k*mini_batch_size : (k+1)*mini_batch_size]
         mini_batch_Y = shuffled_Y[:, k*mini_batch_size : (k+1)*mini_batch_size]
-        ### END CODE HERE ###
+
         mini_batch = (mini_batch_X, mini_batch_Y)
         mini_batches.append(mini_batch)
     
     # Handling the end case (last mini-batch < mini_batch_size)
     if m % mini_batch_size != 0:
-        ### START CODE HERE ### (approx. 2 lines)
+
         mini_batch_X = shuffled_X[:, num_complete_minibatches*mini_batch_size : ]
         mini_batch_Y = shuffled_Y[:, num_complete_minibatches*mini_batch_size : ]
-        ### END CODE HERE ###
+
         mini_batch = (mini_batch_X, mini_batch_Y)
         mini_batches.append(mini_batch)
     
     return mini_batches
 
 
-# In[27]:
+# In[41]:
 
-def model(X_train, Y_train, X_val, Y_val, learning_rate = 0.0001,
-          num_epochs = 1000, minibatch_size = 32, print_cost = True):
+def model(X_train, Y_train, X_val, Y_val, learning_rate = 0.001,
+          num_epochs = 100, minibatch_size = 64, print_cost = True):
     """
     Implements a two-layer tensorflow neural network: LINEAR->SIGMOID->LINEAR->SOFTMAX.
     
@@ -280,31 +268,24 @@ def model(X_train, Y_train, X_val, Y_val, learning_rate = 0.0001,
     (n_x, m) = X_train.shape                          # (n_x: input size, m : number of examples in the train set)
     n_y = Y_train.shape[0]                            # n_y : output size
     costs = []                                        # To keep track of the cost
+    val_costs = []                                    # # To keep track of the cost of validation
     
     # Create Placeholders of shape (n_x, n_y)
-    ### START CODE HERE ### (1 line)
     X, Y = create_placeholders(n_x, n_y)
-    ### END CODE HERE ###
+
 
     # Initialize parameters
-    ### START CODE HERE ### (1 line)
     parameters = initialize_parameters()
-    ### END CODE HERE ###
     
     # Forward propagation: Build the forward propagation in the tensorflow graph
-    ### START CODE HERE ### (1 line)
     Z2 = forward_propagation(X, parameters)
-    ### END CODE HERE ###
+
     
     # Cost function: Add cost function to tensorflow graph
-    ### START CODE HERE ### (1 line)
     cost = compute_cost(Z2, Y)
-    ### END CODE HERE ###
     
     # Backpropagation: Define the tensorflow optimizer. Use an AdamOptimizer.
-    ### START CODE HERE ### (1 line)
     optimizer = tf.train.AdamOptimizer(learning_rate = learning_rate).minimize(cost)
-    ### END CODE HERE ###
     
     # Initialize all the variables
     init = tf.global_variables_initializer()
@@ -330,25 +311,32 @@ def model(X_train, Y_train, X_val, Y_val, learning_rate = 0.0001,
                 
                 # IMPORTANT: The line that runs the graph on a minibatch.
                 # Run the session to execute the "optimizer" and the "cost", the feedict should contain a minibatch for (X,Y).
-                ### START CODE HERE ### (1 line)
                 _ , minibatch_cost = sess.run([optimizer, cost], feed_dict={X: minibatch_X, Y: minibatch_Y})
-                ### END CODE HERE ###
                 
                 epoch_cost += minibatch_cost / num_minibatches
-
+            
+            val_cost = sess.run(cost, feed_dict={X: X_val, Y: Y_val})
+            
             # Print the cost every epoch
-            if print_cost == True and epoch % 100 == 0:
-                print ("Cost after epoch %i: %f" % (epoch, epoch_cost))
+            if print_cost == True and epoch % 10 == 0:
+                print ("Cost after epoch %i: %f  ---  %f" % (epoch, epoch_cost, val_cost))
             if print_cost == True and epoch % 5 == 0:
                 costs.append(epoch_cost)
-            
+                val_costs.append(val_cost)
             # Early stoping condition 
             #if np.absolute(costs[-1] - epoch_cost) < 1e-12:
             #    break
                 
         # plot the cost
         plt.plot(np.squeeze(costs))
-        plt.ylabel('cost')
+        plt.ylabel('cost of training dataset')
+        plt.xlabel('iterations (per tens)')
+        plt.title("Learning rate =" + str(learning_rate))
+        plt.show()
+        
+        # plot the cost of validation
+        plt.plot(np.squeeze(val_costs))
+        plt.ylabel('cost of validation dataset')
         plt.xlabel('iterations (per tens)')
         plt.title("Learning rate =" + str(learning_rate))
         plt.show()
@@ -369,12 +357,12 @@ def model(X_train, Y_train, X_val, Y_val, learning_rate = 0.0001,
         return parameters
 
 
-# In[ ]:
+# In[42]:
 
-parameters = model(X_train_flatten, y_train_one_hot, X_val_flatten, y_val_one_hot)
+get_ipython().run_cell_magic('time', '', 'parameters = model(X_train_flatten, y_train_one_hot, X_val_flatten, y_val_one_hot)')
 
 
-# In[32]:
+# In[43]:
 
 # Start the session to compute the tensorflow graph
 with tf.Session() as sess:
