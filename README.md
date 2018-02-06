@@ -24,6 +24,6 @@ Notebook for quick search can be found [here](https://ssq.github.io/2017/11/19/C
   - Define and train a CNN from scratch
   - Understand building blocks and training tricks of modern CNNs
   - Use pre-trained CNN to solve a new task
-  - [x] [Your first CNN on CIFAR-10]()
-  - [x] []()
+  - [x] [Your first CNN on CIFAR-10](https://github.com/SSQ/Coursera-HSE-Introduction-to-Deep-Learning/tree/master/Week%203%20PA%201%20Your%20first%20CNN%20on%20CIFAR-10)
+  - [x] [Week 3 PA 2 Fine-tuning InceptionV3 for flowers classification](https://github.com/SSQ/Coursera-HSE-Introduction-to-Deep-Learning/tree/master/Week%203%20PA%202%20Fine-tuning%20InceptionV3%20for%20flowers%20classification)
   
