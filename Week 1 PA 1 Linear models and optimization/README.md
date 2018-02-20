@@ -1,5 +1,7 @@
 # Linear models and optimization
- 
+<img src="images/kernel.png" width=50% />
+[image comes from Week 1 programming assignment 1]
+
 # Goal
 Implement a linear classifier and train it using stochastic gradient descent modifications.
 
