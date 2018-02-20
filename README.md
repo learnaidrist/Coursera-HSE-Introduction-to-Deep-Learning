@@ -27,3 +27,19 @@ Notebook for quick search can be found [here](https://ssq.github.io/2017/11/19/C
   - [x] [Your first CNN on CIFAR-10](https://github.com/SSQ/Coursera-HSE-Introduction-to-Deep-Learning/tree/master/Week%203%20PA%201%20Your%20first%20CNN%20on%20CIFAR-10)
   - [x] [Week 3 PA 2 Fine-tuning InceptionV3 for flowers classification](https://github.com/SSQ/Coursera-HSE-Introduction-to-Deep-Learning/tree/master/Week%203%20PA%202%20Fine-tuning%20InceptionV3%20for%20flowers%20classification)
   
+- Week 4 Unsupervised representation learning
+  - Understand what is unsupervised learning and how you can benifit from it
+  - Implement and train deep autoencoders
+  - Apply autoencoders for image retrieval and image morphing
+  - Implement and train generative adversarial networks
+  - Understand basics of unsupervised learning of word embeddings
+  - [x] [Autoencoders](https://github.com/SSQ/Coursera-HSE-Introduction-to-Deep-Learning/tree/master/Week%204%20PA%201%20Simple%20autoencoder)
+
+- Week 5 Deep learning for sequences
+  - Define and train an RNN from scratch
+  - Understand modern architectures of RNNs: LSTM, GRU
+  - Use RNNs for different types of tasks: sequential input, sequential output, sequential input and output
+  - [x] [Generating names with RNNs](https://github.com/SSQ/Coursera-HSE-Introduction-to-Deep-Learning/tree/master/Week%205%20PA%201%20Generating%20names%20with%20RNNs)
+  
+- Week 6 Final Project
+  - [ ] [Image Captioning Final Project]()
