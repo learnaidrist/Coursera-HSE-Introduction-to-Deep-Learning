@@ -1,4 +1,6 @@
 # Your first CNN on CIFAR-10 via Keras
+<img src="images/confusion.png" width=50% />
+
 train/test -- 0.8/0.78
 
 # Goal
