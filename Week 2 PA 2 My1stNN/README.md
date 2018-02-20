@@ -1,5 +1,13 @@
 # my1stNN
 
+<div>
+  <div width=30%>
+    <img src="images/train.png" width=50% />
+  </div>
+  <div width=30%>
+    <img src="images/validation.png" width=50% />
+  </div>
+</div>
 My1stNN train/val/test 1/0.96/0.96
 
 # Goal
