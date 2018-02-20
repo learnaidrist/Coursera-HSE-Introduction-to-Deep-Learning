@@ -1,7 +1,7 @@
 # Fine-tuning InceptionV3 for flowers classification
-[InceptionV3 architecture](https://research.googleblog.com/2016/03/train-your-own-image-classifier-with.html) 
-[Flowers classification dataset](http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html) consists of 102 flower categories commonly occurring in the United Kingdom. Each class contains between 40 and 258 images
-train/test -- 0.956/0.92875
+- [InceptionV3 architecture](https://research.googleblog.com/2016/03/train-your-own-image-classifier-with.html) 
+- [Flowers classification dataset](http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html) consists of 102 flower categories commonly occurring in the United Kingdom. Each class contains between 40 and 258 images
+- train/test -- 0.956/0.92875
 
 # Goal
 fine-tune InceptionV3 architecture for flowers classification task
@@ -23,7 +23,7 @@ fine-tune InceptionV3 architecture for flowers classification task
 - open `md` in file `week3_task2_fine_tuning_clean`
 - open `.html` file via brower for quick look.
 
-# Dataset was downloaded for you, it takes 12 min and 400mb. Relevant links (just in case):
+# Relevant dataset links, it takes about 12 min and 400mb:
 http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html
 http://www.robots.ox.ac.uk/~vgg/data/flowers/102/102flowers.tgz
 http://www.robots.ox.ac.uk/~vgg/data/flowers/102/imagelabels.mat
