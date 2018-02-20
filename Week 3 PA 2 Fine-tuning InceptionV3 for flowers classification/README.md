@@ -24,9 +24,9 @@ fine-tune InceptionV3 architecture for flowers classification task
 - open `.html` file via brower for quick look.
 
 # Relevant dataset links, it takes about 12 min and 400mb:
-http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html
-http://www.robots.ox.ac.uk/~vgg/data/flowers/102/102flowers.tgz
-http://www.robots.ox.ac.uk/~vgg/data/flowers/102/imagelabels.mat
+- http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html
+- http://www.robots.ox.ac.uk/~vgg/data/flowers/102/102flowers.tgz
+- http://www.robots.ox.ac.uk/~vgg/data/flowers/102/imagelabels.mat
 
 # What you've done:
 
